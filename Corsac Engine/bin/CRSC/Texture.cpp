@@ -8,7 +8,7 @@ SDL_Texture* Texture::Load(const char* path)
 	return t;
 }
 
-void Texture::Draw(SDL_Texture* tex, SDL_Rect src, SDL_Rect dest)
+void Texture::Draw(SDL_Texture* tex, SDL_Rect src, SDL_Rect dest, SDL_RendererFlip flip)
 {
-	SDL_RenderCopy(App::Renderer, tex, &src, &dest);
+	SDL_RenderCopyEx(App::Renderer, tex, &src, &dest, NULL, NULL, flip);
 }

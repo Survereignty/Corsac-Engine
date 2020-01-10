@@ -92,6 +92,9 @@
     <ClInclude Include="bin\CRSC\ECS\Tile.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="bin\CRSC\ECS\Animation.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Info.txt" />

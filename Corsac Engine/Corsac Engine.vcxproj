@@ -161,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bin\CRSC\App.h" />
+    <ClInclude Include="bin\CRSC\ECS\Animation.h" />
     <ClInclude Include="bin\CRSC\ECS\Collider.h" />
     <ClInclude Include="bin\CRSC\ECS\KeyboardController.h" />
     <ClInclude Include="bin\CRSC\CRSC_Collision.h" />

@@ -33,14 +33,15 @@ void Game::Init()
     SDL_SetRenderDrawColor(App::Renderer, 0, 0, 0, 255);
 
     CRSC_Map::Load("./bin/data/sprites/p_16x16.map", 16, 16);
+    A->SetFull();
 
     slime.addComponent<Transform>(120, 120, 35, 35, 1);
-    slime.addComponent<Sprite>("./bin/data/sprites/slime.png", 6, 200);
+    slime.addComponent<Sprite>("./bin/data/sprites/slime.png", true);
     slime.addComponent<Collider>("slime");
     slime.addGroup(Enemies);
 
-    player.addComponent<Transform>(0, 0, 42, 42, 1);
-    player.addComponent<Sprite>("./bin/data/sprites/foxv2.png", 6, 200);
+    player.addComponent<Transform>(0, 0, 36, 36, 1);
+    player.addComponent<Sprite>("./bin/data/sprites/foxv1.png", true);
     player.addComponent<KeyboardController>();
     player.addComponent<Collider>("player");
     player.addGroup(Players);
