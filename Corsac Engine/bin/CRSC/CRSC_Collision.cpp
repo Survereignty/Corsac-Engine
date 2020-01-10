@@ -1,5 +1,4 @@
 #include "CRSC_Collision.h"
-#include "ECS\Collider.h"
 
 bool CRSC_Collision::AABB(const SDL_Rect& recA, const SDL_Rect& recB)
 {

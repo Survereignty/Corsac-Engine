@@ -2,67 +2,67 @@
 
 CRSC_Timer::CRSC_Timer()
 {
-    mStartTicks = 0;
-    mPausedTicks = 0;
-    mPaused = false;
-    mStarted = false;
+    this->mStartTicks = 0;
+    this->mPausedTicks = 0;
+    this->mPaused = false;
+    this->mStarted = false;
 }
 void CRSC_Timer::start()
 {
-    mStarted = true;
-    mPaused = false;
+    this->mStarted = true;
+    this->mPaused = false;
 
-    mStartTicks = SDL_GetTicks();
-    mPausedTicks = 0;
+    this->mStartTicks = SDL_GetTicks();
+    this->mPausedTicks = 0;
 }
 void CRSC_Timer::stop()
 {
-    mStarted = false;
-    mPaused = false;
+    this->mStarted = false;
+    this->mPaused = false;
 
-    mStartTicks = 0;
-    mPausedTicks = 0;
+    this->mStartTicks = 0;
+    this->mPausedTicks = 0;
 }
 void CRSC_Timer::pause()
 {
-    if (mStarted && !mPaused)
+    if (this->mStarted && !this->mPaused)
     {
-        mPaused = true;
-        mPausedTicks = SDL_GetTicks() - mStartTicks;
-        mStartTicks = 0;
+        this->mPaused = true;
+        this->mPausedTicks = SDL_GetTicks() - mStartTicks;
+        this->mStartTicks = 0;
     }
 }
 void CRSC_Timer::unpause()
 {
-    if (mStarted && mPaused)
+    if (this->mStarted && this->mPaused)
     {
-        mPaused = false;
-        mStartTicks = SDL_GetTicks() - mPausedTicks;
-        mPausedTicks = 0;
+        this->mPaused = false;
+        this->mStartTicks = SDL_GetTicks() - mPausedTicks;
+        this->mPausedTicks = 0;
     }
 }
 Uint32 CRSC_Timer::getTicks()
 {
     Uint32 time = 0;
-    if (mStarted)
+    if (this->mStarted)
     {
-        if (mPaused)
+        if (this->mPaused)
         {
-            time = mPausedTicks;
+            time = this->mPausedTicks;
         }
         else
         {
-            time = SDL_GetTicks() - mStartTicks;
+            time = SDL_GetTicks() - this->mStartTicks;
         }
     }
     return time;
 }
 bool CRSC_Timer::isStarted()
 {
-    return mStarted;
+    return this->mStarted;
 }
 
 bool CRSC_Timer::isPaused()
 {
-    return mPaused && mStarted;
+    return this->mPaused && this->mStarted;
 }

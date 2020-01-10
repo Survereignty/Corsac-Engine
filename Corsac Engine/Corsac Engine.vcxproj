@@ -156,7 +156,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="bin\CRSC\Texture.cpp" />
     <ClCompile Include="bin\CRSC\CRSC_Timer.cpp" />
-    <ClCompile Include="bin\CRSC\CRSC_Object.cpp" />
     <ClCompile Include="bin\CRSC\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -169,7 +168,6 @@
     <ClInclude Include="bin\Game.h" />
     <ClInclude Include="bin\CRSC\Texture.h" />
     <ClInclude Include="bin\CRSC\CRSC_Timer.h" />
-    <ClInclude Include="bin\CRSC\CRSC_Object.h" />
     <ClInclude Include="bin\CRSC\CRSC_Map.h" />
     <ClInclude Include="bin\CRSC\ECS\ECS.h" />
     <ClInclude Include="bin\CRSC\ECS\Components.h" />

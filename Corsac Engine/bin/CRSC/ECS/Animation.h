@@ -9,8 +9,8 @@ struct Animation
 	Animation() {}
 	Animation(int i, int f, int s)
 	{
-		index = i;
-		frames = f;
-		speed = s;
+		this->index = i;
+		this->frames = f;
+		this->speed = s;
 	}
 };

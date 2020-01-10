@@ -27,9 +27,6 @@
     <ClCompile Include="bin\CRSC\App.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="bin\CRSC\CRSC_Object.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="bin\CRSC\CRSC_Map.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -54,9 +51,6 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="bin\CRSC\App.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="bin\CRSC\CRSC_Object.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="bin\CRSC\CRSC_Map.h">

@@ -17,6 +17,7 @@ std::vector<Collider*> Game::colliders;
 
 auto& player(manager.addEntity());
 auto& slime(manager.addEntity());
+auto& coub(manager.addEntity());
 
 enum groupLabels : std::size_t
 {
@@ -33,18 +34,24 @@ void Game::Init()
     SDL_SetRenderDrawColor(App::Renderer, 0, 0, 0, 255);
 
     CRSC_Map::Load("./bin/data/sprites/p_16x16.map", 16, 16);
-    A->SetFull();
-
-    slime.addComponent<Transform>(120, 120, 35, 35, 1);
-    slime.addComponent<Sprite>("./bin/data/sprites/slime.png", true);
-    slime.addComponent<Collider>("slime");
-    slime.addGroup(Enemies);
+    //A->SetFull();
 
     player.addComponent<Transform>(0, 0, 36, 36, 1);
     player.addComponent<Sprite>("./bin/data/sprites/foxv1.png", true);
     player.addComponent<KeyboardController>();
     player.addComponent<Collider>("player");
     player.addGroup(Players);
+
+
+    slime.addComponent<Transform>(120, 120, 35, 35, 1);
+    slime.addComponent<Sprite>("./bin/data/sprites/slime.png", true);
+    slime.addComponent<Collider>("slime");
+    slime.addGroup(Enemies);
+
+    coub.addComponent<Transform>(200, 200, 42, 42, 1);
+    coub.addComponent<Sprite>("./bin/data/sprites/coub.png");
+    coub.addComponent<Collider>("coub");
+    coub.addGroup(Enemies);
 
 }
 void Game::Event()

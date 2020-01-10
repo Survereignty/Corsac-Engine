@@ -14,39 +14,39 @@ public:
 
 	Transform()
 	{
-		position.Zero();
+		this->position.Zero();
 	}
 
 	Transform(int sc)
 	{
-		position.Zero();
-		scale = sc;
+		this->position.Zero();
+		this->scale = sc;
 	}
 
 	Transform(float x, float y)
 	{
-		position.x = x;
-		position.y = y;
+		this->position.x = x;
+		this->position.y = y;
 	}
 
 	Transform(float x, float y, int h, int w, int sc)
 	{
-		position.x = x;
-		position.y = y;
-		width = w;
-		height = h;
-		scale = sc;
+		this->position.x = x;
+		this->position.y = y;
+		this->width = w;
+		this->height = h;
+		this->scale = sc;
 	}
 
 	void Init() override
 	{
-		velocity.Zero();
+		this->velocity.Zero();
 	}
 
 	void Update() override
 	{
-		position.x += velocity.x * speed;
-		position.y += velocity.y * speed;
+		this->position.x += this->velocity.x * this->speed;
+		this->position.y += this->velocity.y * this->speed;
 	}
 };
 

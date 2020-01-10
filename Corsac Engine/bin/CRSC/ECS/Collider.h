@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "SDL.h"
+//#include "SDL2/SDL.h"
 #include "Components.h"
 
 class Collider : public Component 
@@ -12,7 +13,7 @@ public:
 	
 	Collider(std::string t)
 	{
-		tag = t;
+		this->tag = t;
 	}
 
 	void Init() override
@@ -21,17 +22,17 @@ public:
 		{
 			entity->addComponent<Transform>();
 		}
-		transform = &entity->getComponent<Transform>();
+		this->transform = &entity->getComponent<Transform>();
 
 		Game::colliders.push_back(this);
 	}
 
 	void Update() override
 	{
-		collider.x = static_cast<int>(transform->position.x);
-		collider.y = static_cast<int>(transform->position.y);
-		collider.w = transform->width * transform->scale;
-		collider.h = transform->height * transform->scale;
+		this->collider.x = static_cast<int>(this->transform->position.x);
+		this->collider.y = static_cast<int>(this->transform->position.y);
+		this->collider.w = this->transform->width * this->transform->scale;
+		this->collider.h = this->transform->height * this->transform->scale;
 	}
 
 private:

@@ -2,6 +2,7 @@
 #include <map>
 
 #include "SDL.h"
+//#include "SDL2/SDL.h"
 #include "Components.h"
 #include "Animation.h"
 
@@ -28,21 +29,21 @@ public:
 	Sprite() = default;
 	Sprite(const char* path)
 	{
-		tex = Texture::Load(path);
+		this->tex = Texture::Load(path);
 	}
 
 	Sprite(const char* path, bool isAnimated)
 	{
-		animated = isAnimated;
+		this->animated = isAnimated;
 
 		Animation idle = Animation(0, 6, 200);
 		Animation walk = Animation(1, 6, 100);
 
-		animations.emplace("Idle", idle);
-		animations.emplace("Walk", walk);
+		this->animations.emplace("Idle", idle);
+		this->animations.emplace("Walk", walk);
 
 		Play("Idle");
-		tex = Texture::Load(path);
+		this->tex = Texture::Load(path);
 	}
 
 	~Sprite()
@@ -54,36 +55,36 @@ public:
 	{
 		transform = &entity->getComponent<Transform>();
 
-		src.x = src.y = 0;
-		src.w = transform->width;
-		src.h = transform->height;
+		this->src.x = this->src.y = 0;
+		this->src.w = this->transform->width;
+		this->src.h = this->transform->height;
 	}
 
 	void Update() override
 	{
 		if (animated)
 		{
-			src.x = src.w * static_cast<int>((SDL_GetTicks() / speed) % frames);
+			this->src.x = this->src.w * static_cast<int>((SDL_GetTicks() / speed) % frames);
 		}
 
-		src.y = animIndex * transform->height;
+		this->src.y = animIndex * transform->height;
 
-		dest.x = static_cast<int>(transform->position.x);
-		dest.y = static_cast<int>(transform->position.y);
-		dest.w = transform->width * transform->scale;
-		dest.h = transform->height * transform->scale;
+		this->dest.x = static_cast<int>(this->transform->position.x);
+		this->dest.y = static_cast<int>(this->transform->position.y);
+		this->dest.w = this->transform->width * this->transform->scale;
+		this->dest.h = this->transform->height * this->transform->scale;
 	}
 
 	void Play(const char* aniName)
 	{
-		frames = animations[aniName].frames;
-		animIndex = animations[aniName].index;
-		speed = animations[aniName].speed;
+		this->frames = this->animations[aniName].frames;
+		this->animIndex = this->animations[aniName].index;
+		this->speed = this->animations[aniName].speed;
 	}
 
 	void Render() override
 	{
-		Texture::Draw(tex, src, dest, flip);
+		Texture::Draw(this->tex, this->src, this->dest, this->flip);
 	}
 };
 

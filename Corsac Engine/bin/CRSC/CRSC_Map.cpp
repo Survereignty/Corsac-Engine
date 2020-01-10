@@ -1,7 +1,4 @@
 #include "CRSC_Map.h"
-#include "../Game.h"
-#include <fstream>
-#include <iostream>
 
 CRSC_Map::CRSC_Map()
 {

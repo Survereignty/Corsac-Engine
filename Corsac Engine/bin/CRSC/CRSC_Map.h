@@ -1,6 +1,10 @@
 #pragma once
 #include <string>
 
+#include "../Game.h"
+#include <fstream>
+#include <iostream>
+
 class CRSC_Map
 {
 public:

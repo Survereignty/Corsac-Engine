@@ -12,8 +12,8 @@ public:
 
 	void Init() override
 	{
-		transform = &entity->getComponent<Transform>();
-		sprite = &entity->getComponent<Sprite>();
+		this->transform = &entity->getComponent<Transform>();
+		this->sprite = &entity->getComponent<Sprite>();
 	}
 
 	void Update() override
@@ -23,21 +23,21 @@ public:
 			switch (Game::event.key.keysym.sym)
 			{
 			case SDLK_w:
-				transform->velocity.y = -1;
-				sprite->Play("Walk");
+				this->transform->velocity.y = -1;
+				this->sprite->Play("Walk");
 				break;
 			case SDLK_a:
-				transform->velocity.x = -1;
-				sprite->Play("Walk");
-				sprite->flip = SDL_FLIP_HORIZONTAL;
+				this->transform->velocity.x = -1;
+				this->sprite->Play("Walk");
+				this->sprite->flip = SDL_FLIP_HORIZONTAL;
 				break;
 			case SDLK_d:
-				transform->velocity.x = 1;
-				sprite->Play("Walk");
+				this->transform->velocity.x = 1;
+				this->sprite->Play("Walk");
 				break;
 			case SDLK_s:
-				transform->velocity.y = 1;
-				sprite->Play("Walk");
+				this->transform->velocity.y = 1;
+				this->sprite->Play("Walk");
 				break;
 			default:
 				break;
@@ -48,21 +48,21 @@ public:
 			switch (Game::event.key.keysym.sym)
 			{
 			case SDLK_w:
-				transform->velocity.y = 0;
-				sprite->Play("Idle");
+				this->transform->velocity.y = 0;
+				this->sprite->Play("Idle");
 				break;
 			case SDLK_a:
-				transform->velocity.x = 0;
-				sprite->Play("Idle");
-				sprite->flip = SDL_FLIP_NONE;
+				this->transform->velocity.x = 0;
+				this->sprite->Play("Idle");
+				this->sprite->flip = SDL_FLIP_NONE;
 				break;
 			case SDLK_d:
-				transform->velocity.x = 0;
-				sprite->Play("Idle");
+				this->transform->velocity.x = 0;
+				this->sprite->Play("Idle");
 				break;
 			case SDLK_s:
-				transform->velocity.y = 0;
-				sprite->Play("Idle");
+				this->transform->velocity.y = 0;
+				this->sprite->Play("Idle");
 				break;
 			default:
 				break;
