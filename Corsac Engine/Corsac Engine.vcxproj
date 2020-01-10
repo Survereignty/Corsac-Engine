@@ -177,7 +177,25 @@
     <ClInclude Include="bin\CRSC\Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="bin\data\sprites\pixel_16x16.txt" />
     <Text Include="Info.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="bin\data\sprites\background.png" />
+    <Image Include="bin\data\sprites\coub.png" />
+    <Image Include="bin\data\sprites\dirt.png" />
+    <Image Include="bin\data\sprites\foo.png" />
+    <Image Include="bin\data\sprites\foxv2.png" />
+    <Image Include="bin\data\sprites\grass.png" />
+    <Image Include="bin\data\sprites\player.png" />
+    <Image Include="bin\data\sprites\RunRight.png" />
+    <Image Include="bin\data\sprites\slime.png" />
+    <Image Include="bin\data\sprites\tilt.png" />
+    <Image Include="bin\data\sprites\water.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\data\sprites\lab.map" />
+    <None Include="bin\data\sprites\p_16x16.map" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

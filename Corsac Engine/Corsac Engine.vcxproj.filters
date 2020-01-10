@@ -95,5 +95,45 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Info.txt" />
+    <Text Include="bin\data\sprites\pixel_16x16.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="bin\data\sprites\water.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="bin\data\sprites\background.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="bin\data\sprites\coub.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="bin\data\sprites\dirt.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="bin\data\sprites\foo.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="bin\data\sprites\foxv2.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="bin\data\sprites\grass.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="bin\data\sprites\player.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="bin\data\sprites\RunRight.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="bin\data\sprites\slime.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="bin\data\sprites\tilt.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\data\sprites\lab.map" />
+    <None Include="bin\data\sprites\p_16x16.map" />
   </ItemGroup>
 </Project>
