@@ -1,6 +1,7 @@
 #pragma once
 #include "./CRSC/App.h"
 #include <vector>
+#include "CRSC/CRSC_Map.h"
 
 class Collider;
 
@@ -10,10 +11,6 @@ private:
 	App* A; // Программа
 public:
 	static SDL_Event event; // SDL События
-	static std::vector<Collider*> colliders;
-
-	static void AddTile(int id, int x, int y);
-
 
 	int FPS = 60;
 	// Инициализация
@@ -27,6 +24,16 @@ public:
 	// Очистка
 	void Clear();
 
-	bool run = false; // Состояние
+
+	enum groupLabels : std::size_t
+	{
+		Map,
+		Players,
+		Colliders
+	};
+
+
+	static bool run; // Состояние
+	static SDL_Rect camera;
 };
 

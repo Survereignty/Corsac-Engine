@@ -1,8 +1,8 @@
 #include "App.h"
 
 SDL_Renderer* App::Renderer = nullptr;
-int App::Width = 800;
-int App::Height = 600;
+int App::Width = 1800;
+int App::Height = 1000;
 
 void App::Setup(const char* AppName, const char* OrgName)
 {

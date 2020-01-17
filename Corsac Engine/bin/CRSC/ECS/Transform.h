@@ -7,10 +7,11 @@ public:
 	Vector2D position;
 	Vector2D velocity;
 
-	int height = 32;
-	int width = 32;
+	int height = 36;
+	int width = 36;
 	int scale = 1;
-	int speed = 3;
+
+	int speed = 6;
 
 	Transform()
 	{
@@ -19,7 +20,7 @@ public:
 
 	Transform(int sc)
 	{
-		this->position.Zero();
+		position.Zero();
 		this->scale = sc;
 	}
 
@@ -45,8 +46,8 @@ public:
 
 	void Update() override
 	{
-		this->position.x += this->velocity.x * this->speed;
-		this->position.y += this->velocity.y * this->speed;
+		position.x += static_cast<int>(velocity.x * speed);
+		position.y += static_cast<int>(velocity.y * speed);
 	}
 };
 

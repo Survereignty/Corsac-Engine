@@ -7,25 +7,17 @@
 
 #include "./CRSC/ECS/Components.h"
 
-CRSC_Map* map;
-
 Manager manager;
 
 SDL_Event Game::event;
-
-std::vector<Collider*> Game::colliders;
+SDL_Rect Game::camera = { 0, 0, 800, 640 };
+bool Game::run = false;
 
 auto& player(manager.addEntity());
 auto& slime(manager.addEntity());
 auto& coub(manager.addEntity());
 
-enum groupLabels : std::size_t
-{
-    Map,
-    Players,
-    Enemies,
-    Colliders
-};
+
 
 void Game::Init()
 {
@@ -33,27 +25,31 @@ void Game::Init()
     A->Setup("Corsac Game", "Corsac");
     SDL_SetRenderDrawColor(App::Renderer, 0, 0, 0, 255);
 
-    CRSC_Map::Load("./bin/data/sprites/p_16x16.map", 16, 16);
+    CRSC_Map* map = new CRSC_Map("./bin/data/sprites/mapTites.png", 4, 36);
+    map->Load("./bin/data/maps/Map.map", 36, 36);
+
     //A->SetFull();
 
-    player.addComponent<Transform>(0, 0, 36, 36, 1);
+    player.addComponent<Transform>(1000, 600, 36, 36, 3);
     player.addComponent<Sprite>("./bin/data/sprites/foxv1.png", true);
     player.addComponent<KeyboardController>();
     player.addComponent<Collider>("player");
     player.addGroup(Players);
 
-
-    slime.addComponent<Transform>(120, 120, 35, 35, 1);
+    slime.addComponent<Transform>(50, 150, 35, 35, 3);
     slime.addComponent<Sprite>("./bin/data/sprites/slime.png", true);
     slime.addComponent<Collider>("slime");
-    slime.addGroup(Enemies);
 
-    coub.addComponent<Transform>(200, 200, 42, 42, 1);
+    coub.addComponent<Transform>(1200, 300, 42, 42, 3);
     coub.addComponent<Sprite>("./bin/data/sprites/coub.png");
     coub.addComponent<Collider>("coub");
-    coub.addGroup(Enemies);
 
 }
+
+auto& tiles(manager.getGroup(Game::Map));
+auto& players(manager.getGroup(Game::Players));
+auto& colliders(manager.getGroup(Game::Colliders));
+
 void Game::Event()
 {
     SDL_PollEvent(&event);
@@ -68,18 +64,39 @@ void Game::Event()
 }
 void Game::Update() 
 {
+    SDL_Rect playerCol = player.getComponent<Collider>().collider;
+    Vector2D playerPos = player.getComponent<Transform>().position;
+
     manager.Refresh();
     manager.Update();
 
-    for (auto cc : colliders)
+    for (auto& c : colliders)
     {
-        CRSC_Collision::AABB(player.getComponent<Collider>(), *cc);
+        SDL_Rect cCol = c->getComponent<Collider>().collider;
+        if (CRSC_Collision::AABB(cCol, playerCol))
+        {
+            player.getComponent<Transform>().position = playerPos;
+        }
     }
+
+    camera.x = static_cast<int>(player.getComponent<Transform>().position.x - 850);
+    camera.y = static_cast<int>(player.getComponent<Transform>().position.y - 400);
+
+    if (camera.x < 0)
+        camera.x = 0;
+    if (camera.y < 0)
+        camera.y = 0;
+    if (camera.x > camera.w)
+        camera.x = camera.w;
+    if (camera.y > camera.h)
+        camera.h = camera.h;
+
+    //for (auto cc : colliders)
+    //{
+    //    CRSC_Collision::AABB(player.getComponent<Collider>(), *cc);
+    //}
 }
 
-auto& tiles(manager.getGroup(Map));
-auto& players(manager.getGroup(Players));
-auto& enemies(manager.getGroup(Enemies));
 
 void Game::Render()
 {
@@ -88,23 +105,19 @@ void Game::Render()
     {
         t->Render();
     }
+
+    //for (auto& c : colliders)
+    //{
+    //    c->Render();
+    //}
+
     for (auto& p : players)
     {
         p->Render();
-    }
-    for (auto& e : enemies)
-    {
-        e->Render();
     }
     SDL_RenderPresent(App::Renderer);
 }
 void Game::Clear()
 {
     A->Clear();
-}
-void Game::AddTile(int id, int x, int y)
-{
-    auto& tile(manager.addEntity());
-    tile.addComponent<Tile>(x, y, 32, 32, id);
-    tile.addGroup(Map);
 }

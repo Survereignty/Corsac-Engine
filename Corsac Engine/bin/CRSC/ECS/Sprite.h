@@ -5,6 +5,7 @@
 //#include "SDL2/SDL.h"
 #include "Components.h"
 #include "Animation.h"
+#include "../../Game.h"
 
 #include "../Texture.h"
 
@@ -36,7 +37,7 @@ public:
 	{
 		this->animated = isAnimated;
 
-		Animation idle = Animation(0, 6, 200);
+		Animation idle = Animation(0, 6, 300);
 		Animation walk = Animation(1, 6, 100);
 
 		this->animations.emplace("Idle", idle);
@@ -67,12 +68,12 @@ public:
 			this->src.x = this->src.w * static_cast<int>((SDL_GetTicks() / speed) % frames);
 		}
 
-		this->src.y = animIndex * transform->height;
+		src.y = animIndex * transform->height;
 
-		this->dest.x = static_cast<int>(this->transform->position.x);
-		this->dest.y = static_cast<int>(this->transform->position.y);
-		this->dest.w = this->transform->width * this->transform->scale;
-		this->dest.h = this->transform->height * this->transform->scale;
+		dest.x = static_cast<int>(transform->position.x - Game::camera.x);
+		dest.y = static_cast<int>(transform->position.y - Game::camera.y);
+		dest.w = transform->width * transform->scale;
+		dest.h = transform->height * transform->scale;
 	}
 
 	void Play(const char* aniName)

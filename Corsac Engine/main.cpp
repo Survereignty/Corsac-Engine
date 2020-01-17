@@ -1,5 +1,4 @@
 #include <iostream>
-#include "SDL.h"
 #include "./bin/Game.h"
 #include "./bin/CRSC/CRSC_Timer.h"
 
@@ -22,7 +21,7 @@ int SDL_main(int argc, char* argv[]) {
 		capTimer.start();
 		float avgFPS = countedFrames / (fpsTimer.getTicks() / 1000.f);
 		if (avgFPS > 2000000) avgFPS = 0;
-		std::cout << avgFPS << std::endl;
+		//std::cout << avgFPS << std::endl;
 
 		G->Event();
 		G->Update();

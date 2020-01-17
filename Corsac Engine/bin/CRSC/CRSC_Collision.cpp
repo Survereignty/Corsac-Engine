@@ -18,7 +18,6 @@ bool CRSC_Collision::AABB(const Collider& colA, const Collider& colB)
 {
 	if (AABB(colA.collider, colB.collider))
 	{
-		std::cout << colA.tag << " hit: " << colB.tag << std::endl;
 		return true;
 	}
 	else {

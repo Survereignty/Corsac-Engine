@@ -9,12 +9,16 @@ class CRSC_Map
 {
 public:
 
-	CRSC_Map();
+	CRSC_Map(const char* path, int ms, int ts);
 	~CRSC_Map();
 
-	static void Load(std::string path, int sizeX, int sizeY);
+	void AddTile(int srcX, int srcY, int x, int y);
+	void Load(std::string path, int sizeX, int sizeY);
 
 private:
-
+	const char* path;
+	int scale;
+	int tileSize;
+	int scaledSize;
 };
 

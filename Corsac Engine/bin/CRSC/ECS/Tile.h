@@ -1,55 +1,45 @@
 #pragma once
 
 #include "ECS.h"
-#include "Transform.h"
-#include "Sprite.h"
-
 #include "SDL.h"
 //#include "SDL2/SDL.h"
 
 class Tile : public Component
 {
 public:
-	Transform* transform;
-	Sprite* sprite;
 
-	SDL_Rect rect;
-	int id;
-	const char* path;
+	SDL_Texture* texture;
+	SDL_Rect src, dest;
+	Vector2D position;
 
 	Tile() = default;
 
-	Tile(int x, int y, int w, int h, int id)
+	~Tile()
 	{
-		this->rect.x = x;
-		this->rect.y = y;
-		this->rect.w = w;
-		this->rect.h = h;
-		this->id = id;
-
-		switch (id)
-		{
-		case 0:
-			this->path = "./bin/data/sprites/water.png";
-			break;
-		case 1:
-			this->path = "./bin/data/sprites/grass.png";
-			break;
-		case 2:
-			this->path = "./bin/data/sprites/dirt.png";
-			break;
-		default:
-			break;
-		}
+		SDL_DestroyTexture(texture);
 	}
 
-	void Init() override
+	Tile(int srcX, int srcY, int xpos, int ypos, int tsize, int tscale ,const char* path)
 	{
-		entity->addComponent<Transform>((float)rect.x, (float)rect.y, rect.w, rect.h, 1);
-		this->transform = &entity->getComponent<Transform>();
+		this->texture = Texture::Load(path);
 
-		entity->addComponent<Sprite>(path);
-		this->sprite = &entity->getComponent<Sprite>();
+		src.x = srcX;
+		src.y = srcY;
+		src.w = src.h = tsize;
+		position.x = static_cast<float>(xpos);
+		position.y = static_cast<float>(ypos);
+		dest.w = dest.h = tsize * tscale;
+	}
+
+	void Update() override
+	{
+		dest.x = static_cast<int>(position.x - Game::camera.x);
+		dest.y = static_cast<int>(position.y - Game::camera.y);
+	}
+
+	void Render() override
+	{
+		Texture::Draw(texture, src, dest, SDL_FLIP_NONE);
 	}
 
 private:
