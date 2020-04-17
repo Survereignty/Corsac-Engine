@@ -2,53 +2,60 @@
 #include <iostream>
 
 #include "./CRSC/CRSC_Map.h"
-#include "./CRSC/Vector2D.h"
 #include "./CRSC/CRSC_Collision.h"
+#include "./CRSC/CRSC_Asset.h"
 
 #include "./CRSC/ECS/Components.h"
 
+CRSC_Map* map;
 Manager manager;
 
 SDL_Event Game::event;
-SDL_Rect Game::camera = { 0, 0, 800, 640 };
+SDL_Rect Game::camera = { 0, 0, 1200, 1200 };
+
+CRSC_Asset* Game::assets = new CRSC_Asset(&manager);
+
 bool Game::run = false;
 
 auto& player(manager.addEntity());
 auto& slime(manager.addEntity());
 auto& coub(manager.addEntity());
 
-
-
 void Game::Init()
 {
     A = new App();
     A->Setup("Corsac Game", "Corsac");
-    SDL_SetRenderDrawColor(App::Renderer, 0, 0, 0, 255);
 
-    CRSC_Map* map = new CRSC_Map("./bin/data/sprites/mapTites.png", 4, 36);
+    assets->AddTexture("terrain", "./bin/data/sprites/mapTites.png");
+    assets->AddTexture("player", "./bin/data/sprites/fox.png");
+    assets->AddTexture("projectile", "./bin/data/sprites/bolt.png");
+
+    map = new CRSC_Map("terrain", 3, 36);
     map->Load("./bin/data/maps/Map.map", 36, 36);
 
     //A->SetFull();
 
-    player.addComponent<Transform>(1000, 600, 36, 36, 3);
-    player.addComponent<Sprite>("./bin/data/sprites/foxv1.png", true);
+    player.addComponent<Transform>(1000, 600, 32, 32, 2);
+    player.addComponent<Sprite>("player", true);
+    player.getComponent<Sprite>().addAnimation("Idle", 0, 6, 300);
+    player.getComponent<Sprite>().addAnimation("Right", 1, 6, 100);
+    player.getComponent<Sprite>().addAnimation("Down", 2, 6, 100);
+    player.getComponent<Sprite>().addAnimation("Up", 3, 6, 100);
+    player.getComponent<Sprite>().addAnimation("DownRight", 4, 6, 100);
     player.addComponent<KeyboardController>();
     player.addComponent<Collider>("player");
     player.addGroup(Players);
 
-    slime.addComponent<Transform>(50, 150, 35, 35, 3);
-    slime.addComponent<Sprite>("./bin/data/sprites/slime.png", true);
-    slime.addComponent<Collider>("slime");
-
-    coub.addComponent<Transform>(1200, 300, 42, 42, 3);
-    coub.addComponent<Sprite>("./bin/data/sprites/coub.png");
-    coub.addComponent<Collider>("coub");
-
+    assets->CreateProjectile(Vector2D(600, 600), Vector2D(1, 0), 200, 2, "projectile");
+    assets->CreateProjectile(Vector2D(600, 620), Vector2D(1, 0), 200, 2, "projectile");
+    assets->CreateProjectile(Vector2D(400, 600), Vector2D(1, 1), 200, 2, "projectile");
+    assets->CreateProjectile(Vector2D(600, 600), Vector2D(1, -1), 200, 2, "projectile");
 }
 
 auto& tiles(manager.getGroup(Game::Map));
 auto& players(manager.getGroup(Game::Players));
 auto& colliders(manager.getGroup(Game::Colliders));
+auto& projectiles(manager.getGroup(Game::Projectiles));
 
 void Game::Event()
 {
@@ -65,19 +72,22 @@ void Game::Event()
 void Game::Update() 
 {
     SDL_Rect playerCol = player.getComponent<Collider>().collider;
-    Vector2D playerPos = player.getComponent<Transform>().position;
 
-    manager.Refresh();
-    manager.Update();
-
+    bool count = true;
     for (auto& c : colliders)
     {
         SDL_Rect cCol = c->getComponent<Collider>().collider;
         if (CRSC_Collision::AABB(cCol, playerCol))
         {
             player.getComponent<Transform>().position = playerPos;
+            count = false;
         }
     }
+    if (count) {
+        playerPos = player.getComponent<Transform>().position;
+    }
+
+    manager.Refresh();
 
     camera.x = static_cast<int>(player.getComponent<Transform>().position.x - 850);
     camera.y = static_cast<int>(player.getComponent<Transform>().position.y - 400);
@@ -91,30 +101,43 @@ void Game::Update()
     if (camera.y > camera.h)
         camera.h = camera.h;
 
-    //for (auto cc : colliders)
-    //{
-    //    CRSC_Collision::AABB(player.getComponent<Collider>(), *cc);
-    //}
+    manager.Update();
+
+    for (auto& p : projectiles)
+    {
+        if (CRSC_Collision::AABB(player.getComponent<Collider>().collider, p->getComponent<Collider>().collider))
+        {
+            std::cout << "Hit player!" << std::endl;
+            p->Destroy();
+        }
+    }
 }
 
 
 void Game::Render()
 {
     SDL_RenderClear(App::Renderer);
+
     for (auto& t : tiles)
     {
         t->Render();
     }
 
-    //for (auto& c : colliders)
-    //{
-    //    c->Render();
-    //}
+    for (auto& c : colliders)
+    {
+        c->Render();
+    }
 
     for (auto& p : players)
     {
         p->Render();
     }
+    
+    for (auto& p : projectiles)
+    {
+        p->Render();
+    }
+
     SDL_RenderPresent(App::Renderer);
 }
 void Game::Clear()

@@ -4,7 +4,7 @@
 
 extern Manager manager;
 
-CRSC_Map::CRSC_Map(const char* path, int ms, int ts) : path(path), scale(ms), tileSize(ts)
+CRSC_Map::CRSC_Map(std::string tID, int ms, int ts) : texID(tID), scale(ms), tileSize(ts)
 {
 	scaledSize = ms * ts;
 }
@@ -57,6 +57,6 @@ void CRSC_Map::Load(std::string path, int sizeX, int sizeY)
 void CRSC_Map::AddTile(int srcX, int srcY, int x, int y)
 {
 	auto& tile(manager.addEntity());
-	tile.addComponent<Tile>(srcX, srcY, x, y, tileSize, scale, path);
+	tile.addComponent<Tile>(srcX, srcY, x, y, tileSize, scale, texID);
 	tile.addGroup(Game::Map);
 }

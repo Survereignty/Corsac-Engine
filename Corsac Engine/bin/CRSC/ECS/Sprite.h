@@ -8,6 +8,7 @@
 #include "../../Game.h"
 
 #include "../Texture.h"
+#include "../CRSC_Asset.h"
 
 class Sprite : public Component
 {
@@ -28,28 +29,31 @@ public:
 	SDL_RendererFlip flip = SDL_FLIP_NONE;
 
 	Sprite() = default;
-	Sprite(const char* path)
+	Sprite(std::string id)
 	{
-		this->tex = Texture::Load(path);
+		setTex(id);
 	}
 
-	Sprite(const char* path, bool isAnimated)
+	Sprite(std::string id, bool isAnimated)
 	{
 		this->animated = isAnimated;
+		setTex(id);
+	}
 
-		Animation idle = Animation(0, 6, 300);
-		Animation walk = Animation(1, 6, 100);
-
-		this->animations.emplace("Idle", idle);
-		this->animations.emplace("Walk", walk);
-
-		Play("Idle");
-		this->tex = Texture::Load(path);
+	void addAnimation(const char* name ,int y, int x, int speed)
+	{
+		Animation anim = Animation(y, x, speed);
+		this->animations.emplace(name, anim);
+		if (name == "Idle") Play("Idle");
 	}
 
 	~Sprite()
 	{
-		SDL_DestroyTexture(tex);
+	}
+
+	void setTex(std::string id)
+	{
+		this->tex = Game::assets->GetTexture(id);
 	}
 
 	void Init() override

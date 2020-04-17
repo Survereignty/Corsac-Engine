@@ -42,6 +42,12 @@
     <ClCompile Include="bin\CRSC\ECS\ECS.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="bin\CRSC\CRSC_Asset.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="bin\CRSC\CRSC_Logs.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bin\Game.h">
@@ -89,10 +95,21 @@
     <ClInclude Include="bin\CRSC\ECS\Animation.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="bin\CRSC\CRSC_Asset.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="bin\CRSC\ECS\Projectile.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="bin\CRSC\CRSC_Logs.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Info.txt" />
     <Text Include="bin\data\sprites\pixel_16x16.txt" />
+    <Text Include="bin\data\maps\newmapColl.txt" />
+    <Text Include="logs.txt" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="bin\data\sprites\water.png">
@@ -128,9 +145,26 @@
     <Image Include="bin\data\sprites\tilt.png">
       <Filter>Файлы ресурсов</Filter>
     </Image>
+    <Image Include="bin\data\sprites\mapTites.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="bin\data\sprites\collision.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="bin\data\sprites\bolt.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="bin\data\sprites\fox.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\data\sprites\lab.map" />
     <None Include="bin\data\sprites\p_16x16.map" />
+    <None Include="bin\data\maps\Map.map" />
+    <None Include="libpng16-16.dll" />
+    <None Include="SDL2.dll" />
+    <None Include="SDL2_image.dll" />
+    <None Include="zlib1.dll" />
   </ItemGroup>
 </Project>

@@ -1,5 +1,6 @@
 #pragma once
 #include "../Vector2D.h"
+#include <iostream>
 
 class Transform : public Component
 {

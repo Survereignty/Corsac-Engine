@@ -1,9 +1,12 @@
 #include <iostream>
 #include "./bin/Game.h"
 #include "./bin/CRSC/CRSC_Timer.h"
+#include "./bin/CRSC/CRSC_Logs.h"
 
 
 int SDL_main(int argc, char* argv[]) {
+	CRSC_Logs* L = new CRSC_Logs();
+
     Game* G = new Game();
     G->Init();
 	
@@ -26,7 +29,6 @@ int SDL_main(int argc, char* argv[]) {
 		G->Event();
 		G->Update();
 		G->Render();
-
 
 		++countedFrames;
 		int frameTicks = capTimer.getTicks();

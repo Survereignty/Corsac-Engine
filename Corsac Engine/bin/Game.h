@@ -1,14 +1,19 @@
 #pragma once
 #include "./CRSC/App.h"
 #include <vector>
+#include <iostream>
 #include "CRSC/CRSC_Map.h"
+#include "./CRSC/Vector2D.h"
 
+class CRSC_Asset;
 class Collider;
 
 class Game
 {
 private:
 	App* A; // Программа
+
+	Vector2D playerPos;
 public:
 	static SDL_Event event; // SDL События
 
@@ -29,11 +34,13 @@ public:
 	{
 		Map,
 		Players,
-		Colliders
+		Colliders,
+		Projectiles,
 	};
 
 
 	static bool run; // Состояние
 	static SDL_Rect camera;
+	static CRSC_Asset* assets;
 };
 

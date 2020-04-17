@@ -3,33 +3,35 @@
 #include <iostream>
 
 #include "SDL.h"
-//#include "SDL2/SDL.h"
+
+#include "CRSC_Logs.h"
 
 class App
 {
 private:
-	SDL_Window* Window; // Окно
 	// Находит параментры экрана и устанавливает их
-	void FindSize();
+	int FindSize();
 public:
+	static SDL_Window* Window; // Окно
 	static SDL_Renderer* Renderer; // Рендер
 
 	static int Width;	// Ширина
 	static int Height;	// Высота
 
-	const char* AppName;  // Именование программы
-	const char* OrgName;  // Именование огранизации
+	static const char* AppName;  // Именование программы
+	static const char* OrgName;  // Именование огранизации
 	
-	const char* AppPath;  // Путь до программы
-	const char* UserPath; // Путь до user каталога
+	static char* AppPath;  // Путь до программы
+	static char* UserPath; // Путь до user каталога
 
 	// Запустить Engine
-	void Setup(const char* AppName, const char* OrgName);
-	// Установить FullScreen
-	void SetFull(Uint32 value = 1);
-	// Установить размеры окна
-	void SetSize(int w, int h);
+	int Setup(const char* AppName, const char* OrgName);
 	// Полная очистка
 	void Clear();
+
+	// Установить FullScreen
+	static int SetFull(Uint32 value = 1);
+	// Установить размеры окна
+	static int SetSize(int w, int h);
 };
 

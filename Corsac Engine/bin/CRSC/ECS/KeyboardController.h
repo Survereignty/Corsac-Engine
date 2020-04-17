@@ -3,12 +3,16 @@
 #include "../../Game.h"
 #include "ECS.h"
 #include "Components.h"
+#include <iostream>
 
 class KeyboardController : public Component
 {
 public:
 	Transform* transform;
 	Sprite* sprite;
+
+	bool W = false, A = false, S = false, D = false;
+	Vector2D UnitPosition;
 
 	void Init() override
 	{
@@ -23,21 +27,16 @@ public:
 			switch (Game::event.key.keysym.sym)
 			{
 			case SDLK_w:
-				this->transform->velocity.y = -1;
-				this->sprite->Play("Walk");
+				W = true;
 				break;
 			case SDLK_a:
-				this->transform->velocity.x = -1;
-				this->sprite->Play("Walk");
-				this->sprite->flip = SDL_FLIP_HORIZONTAL;
+				A = true;
 				break;
 			case SDLK_d:
-				this->transform->velocity.x = 1;
-				this->sprite->Play("Walk");
+				D = true;
 				break;
 			case SDLK_s:
-				this->transform->velocity.y = 1;
-				this->sprite->Play("Walk");
+				S = true;
 				break;
 			default:
 				break;
@@ -48,25 +47,81 @@ public:
 			switch (Game::event.key.keysym.sym)
 			{
 			case SDLK_w:
-				this->transform->velocity.y = 0;
-				this->sprite->Play("Idle");
+				W = false;
 				break;
 			case SDLK_a:
-				this->transform->velocity.x = 0;
-				this->sprite->Play("Idle");
-				this->sprite->flip = SDL_FLIP_NONE;
+				A = false;
 				break;
 			case SDLK_d:
-				this->transform->velocity.x = 0;
-				this->sprite->Play("Idle");
+				D = false;
 				break;
 			case SDLK_s:
-				this->transform->velocity.y = 0;
-				this->sprite->Play("Idle");
+				S = false;
 				break;
 			default:
 				break;
 			}
+		}
+
+		if (!W && !S && !A && !D) {
+			this->sprite->Play("Idle");
+
+			this->transform->velocity.x = 0;
+			this->transform->velocity.y = 0;
+		}
+		else if (D && S) {
+			this->sprite->Play("DownRight");
+			this->sprite->flip = SDL_FLIP_NONE;
+
+			this->transform->velocity.x = 1;
+			this->transform->velocity.y = 1;
+		}
+		else if (A && S) {
+			this->sprite->Play("DownRight");
+			this->sprite->flip = SDL_FLIP_HORIZONTAL;
+
+			this->transform->velocity.x = -1;
+			this->transform->velocity.y = 1;
+		}
+		else if (W && A) {
+			this->sprite->Play("Right");
+			this->sprite->flip = SDL_FLIP_HORIZONTAL;
+
+			this->transform->velocity.x = -1;
+			this->transform->velocity.y = -1;
+		}
+		else if (W && D) {
+			this->sprite->Play("Right");
+			this->sprite->flip = SDL_FLIP_NONE;
+
+			this->transform->velocity.x = 1;
+			this->transform->velocity.y = -1;
+		}
+		else if (W) {
+			this->sprite->Play("Up");
+
+			this->transform->velocity.y = -1;
+			this->transform->velocity.x = 0;
+		}
+		else if (S) {
+			this->sprite->Play("Down");
+
+			this->transform->velocity.y = 1;
+			this->transform->velocity.x = 0;
+		}
+		else if (A) {
+			this->sprite->Play("Right");
+			this->sprite->flip = SDL_FLIP_HORIZONTAL;
+
+			this->transform->velocity.x = -1;
+			this->transform->velocity.y = 0;
+		}
+		else if (D) {
+			this->sprite->Play("Right");
+			this->sprite->flip = SDL_FLIP_NONE;
+
+			this->transform->velocity.x = 1;
+			this->transform->velocity.y = 0;
 		}
 	}
 private:

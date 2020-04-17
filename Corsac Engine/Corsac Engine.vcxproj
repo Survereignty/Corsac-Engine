@@ -153,7 +153,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="bin\CRSC\App.cpp" />
+    <ClCompile Include="bin\CRSC\CRSC_Asset.cpp" />
     <ClCompile Include="bin\CRSC\CRSC_Collision.cpp" />
+    <ClCompile Include="bin\CRSC\CRSC_Logs.cpp" />
     <ClCompile Include="bin\CRSC\ECS\ECS.cpp" />
     <ClCompile Include="bin\Game.cpp" />
     <ClCompile Include="bin\CRSC\CRSC_Map.cpp" />
@@ -164,10 +166,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bin\CRSC\App.h" />
+    <ClInclude Include="bin\CRSC\CRSC_Asset.h" />
+    <ClInclude Include="bin\CRSC\CRSC_Logs.h" />
     <ClInclude Include="bin\CRSC\ECS\Animation.h" />
     <ClInclude Include="bin\CRSC\ECS\Collider.h" />
     <ClInclude Include="bin\CRSC\ECS\KeyboardController.h" />
     <ClInclude Include="bin\CRSC\CRSC_Collision.h" />
+    <ClInclude Include="bin\CRSC\ECS\Projectile.h" />
     <ClInclude Include="bin\CRSC\ECS\Tile.h" />
     <ClInclude Include="bin\Game.h" />
     <ClInclude Include="bin\CRSC\Texture.h" />
@@ -180,16 +185,22 @@
     <ClInclude Include="bin\CRSC\Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="bin\data\maps\newmapColl.txt" />
     <Text Include="bin\data\sprites\pixel_16x16.txt" />
     <Text Include="Info.txt" />
+    <Text Include="logs.txt" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="bin\data\sprites\background.png" />
+    <Image Include="bin\data\sprites\bolt.png" />
+    <Image Include="bin\data\sprites\collision.png" />
     <Image Include="bin\data\sprites\coub.png" />
     <Image Include="bin\data\sprites\dirt.png" />
     <Image Include="bin\data\sprites\foo.png" />
+    <Image Include="bin\data\sprites\fox.png" />
     <Image Include="bin\data\sprites\foxv2.png" />
     <Image Include="bin\data\sprites\grass.png" />
+    <Image Include="bin\data\sprites\mapTites.png" />
     <Image Include="bin\data\sprites\player.png" />
     <Image Include="bin\data\sprites\RunRight.png" />
     <Image Include="bin\data\sprites\slime.png" />
@@ -197,8 +208,13 @@
     <Image Include="bin\data\sprites\water.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="bin\data\maps\Map.map" />
     <None Include="bin\data\sprites\lab.map" />
     <None Include="bin\data\sprites\p_16x16.map" />
+    <None Include="libpng16-16.dll" />
+    <None Include="SDL2.dll" />
+    <None Include="SDL2_image.dll" />
+    <None Include="zlib1.dll" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
