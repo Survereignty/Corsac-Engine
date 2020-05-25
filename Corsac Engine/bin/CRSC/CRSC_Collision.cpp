@@ -1,6 +1,6 @@
 #include "CRSC_Collision.h"
 
-bool CRSC_Collision::AABB(const SDL_Rect& recA, const SDL_Rect& recB)
+bool CRSC_AABB(const SDL_Rect& recA, const SDL_Rect& recB)
 {
 	if (
 		recA.x + recA.w >= recB.x &&
@@ -14,9 +14,18 @@ bool CRSC_Collision::AABB(const SDL_Rect& recA, const SDL_Rect& recB)
 	return false;
 }
 
-bool CRSC_Collision::AABB(const Collider& colA, const Collider& colB)
+bool CRSC_MouseAABB(const SDL_Rect& obj)
 {
-	if (AABB(colA.collider, colB.collider))
+	int x, y;
+	SDL_GetMouseState(&x, &y);
+
+	SDL_Rect mouse;
+	mouse.h = mouse.w = 1;
+
+	mouse.x = x + (obj.x + (obj.w / 2) - (CRSC_App::Width / 2));
+	mouse.y = y + (obj.y + (obj.h / 2) - (CRSC_App::Height / 2));
+
+	if (CRSC_AABB(mouse, obj))
 	{
 		return true;
 	}

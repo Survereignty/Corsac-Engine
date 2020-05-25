@@ -2,11 +2,9 @@
 #include <string>
 #include <SDL.h>
 
-#include "../ECS/ECS.h"
+#include "../../CRSC/CRSC.h"
 
 #include "Transform.h"
-
-#include "../Modules/Loader.h"
 
 class Collider : public Component 
 {

@@ -2,12 +2,9 @@
 
 #include "SDL.h"
 
-#include "../ECS/ECS.h"
+#include "../../CRSC/CRSC.h"
 
 #include "Transform.h"
-
-#include "../CRSC_App.h"
-
 
 class FixCamera : public Component
 {

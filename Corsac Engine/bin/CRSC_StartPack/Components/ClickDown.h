@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../ECS/ECS.h"
+#include "../../CRSC/CRSC.h"
 
 class ClickDown : public Component
 {

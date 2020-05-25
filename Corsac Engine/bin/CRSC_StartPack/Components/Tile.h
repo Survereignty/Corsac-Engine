@@ -2,9 +2,9 @@
 
 #include <SDL.h>
 
-#include "../ECS/ECS.h"
+#include "../../CRSC/CRSC.h"
 
-#include "../CRSC_Loader.h"
+#include "../Types/Vector2D.h"
 
 class Tile : public Component
 {

@@ -1,12 +1,10 @@
 #pragma once
 
-#include "../ECS/ECS.h"
+#include "Transform.h"
 
-#include "./Transform.h"
+#include "../../CRSC/CRSC.h"
 
 #include "../Types/Vector2D.h"
-
-#include "../CRSC_Scene.h"
 
 class Projectile : public Component
 {

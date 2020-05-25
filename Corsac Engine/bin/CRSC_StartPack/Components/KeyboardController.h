@@ -2,12 +2,12 @@
 
 #include <iostream>
 
-#include "../ECS/ECS.h"
+#include "../../CRSC/CRSC.h"
 
-#include "./Sprite.h"
-#include "./Transform.h"
+#include "../Types/Vector2D.h"
 
-#include "../CRSC_Scene.h"
+#include "Sprite.h"
+#include "Transform.h"
 
 class KeyboardController : public Component
 {

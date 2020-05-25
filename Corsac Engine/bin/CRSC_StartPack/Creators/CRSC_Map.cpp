@@ -1,10 +1,7 @@
 #include "CRSC_Map.h"
-#include "ECS/ECS.h"
 
-#include "CRSC_Scene.h"
-
-#include "Components/Collider.h"
-#include "Components/Tile.h"
+#include "../Components/Collider.h"
+#include "../Components/Tile.h"
 
 extern Manager manager;
 

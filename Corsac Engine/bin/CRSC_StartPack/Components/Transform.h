@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../ECS/ECS.h"
+#include "../../CRSC/CRSC.h"
+
 #include "../Types/Vector2D.h"
 
 class Transform : public Component

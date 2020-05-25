@@ -1,6 +1,6 @@
 #include "CRSC_App.h"
 
-SDL_Window*		CRSC_App::Window		= nullptr;
+SDL_Window*		CRSC_App::Window	= nullptr;
 SDL_Renderer*	CRSC_App::Renderer	= nullptr;
 
 int CRSC_App::Width	= 1800;

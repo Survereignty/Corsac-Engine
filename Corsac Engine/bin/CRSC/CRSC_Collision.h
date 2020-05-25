@@ -1,16 +1,10 @@
 #pragma once
-#include "SDL.h"
-//#include "SDL2/SDL.h"
+#include <SDL.h>
 
-#include "./ECS/Collider.h"
+#include "CRSC_App.h"
 
-class Collider;
+bool CRSC_AABB(const SDL_Rect& recA, const SDL_Rect& recB);
 
-class CRSC_Collision
-{
-public:
-	static bool AABB(const SDL_Rect& recA, const SDL_Rect& recB);
-	static bool AABB(const Collider& colA, const Collider& colB);
-private:
+bool CRSC_MouseAABB(const SDL_Rect& obj);
 
-};
+

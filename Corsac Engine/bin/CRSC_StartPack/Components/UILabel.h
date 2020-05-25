@@ -3,9 +3,7 @@
 #include <SDL.h>
 #include <string>
 
-#include "../ECS/ECS.h"
-
-#include "../Modules/Loader.h"
+#include "../../CRSC/CRSC.h"
 
 class UILabel : public Component
 {

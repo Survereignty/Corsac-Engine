@@ -3,15 +3,11 @@
 
 #include <SDL.h>
 
-#include "../ECS/ECS.h"
-
-#include "./Transform.h"
+#include "../../CRSC/CRSC.h"
 
 #include "../Types/Animation.h"
 
-#include "../Modules/Loader.h"
-
-#include "../CRSC_Loader.h"
+#include "Transform.h"
 
 class Sprite : public Component
 {

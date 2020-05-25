@@ -1,42 +1,47 @@
-#include <iostream>
-#include "./bin/Game.h"
-#include "./bin/CRSC/CRSC_Timer.h"
-#include "./bin/CRSC/CRSC_Logs.h"
+//#include <stdio.h>
+//#include <string>
+//#include <sstream>
+//#include "./bin/Game.h"
+//#include "./bin/CRSC/CRSC_Timer.h"
+//#include "./bin/CRSC/CRSC_Logs.h"
+
+// !!!!!!!!!!!!!!!!!!!!
+// TODO:
+//
+// Удобный API 2.0
+// Примитивы
+// Освешение
+// API Музыки и звуков
+// Интерфейсы
+// Карты (локации)
+// Логирование
+// Сохранение
+//
+// !!!!!!!!!!!!!!!!!!!!
+
+
+#include "./bin/CRSC/CRSC.h"
+
+#include "./bin/World.h"
 
 
 int SDL_main(int argc, char* argv[]) {
-	CRSC_Logs* L = new CRSC_Logs();
 
-    Game* G = new Game();
-    G->Init();
-	
-	const int SCREEN_TICKS_PER_FRAME = 1000 / G->FPS;
+	CRSC_Engine Engine;
 
-	CRSC_Timer fpsTimer;
-	CRSC_Timer capTimer;
+	World* world = new World();
 
-	int countedFrames = 0;
-	fpsTimer.start();
+	Engine.Init("MyGame", "MyCompany");
 
-	G->run = true;
-	while (G->run)
-	{
-		capTimer.start();
-		float avgFPS = countedFrames / (fpsTimer.getTicks() / 1000.f);
-		if (avgFPS > 2000000) avgFPS = 0;
-		//std::cout << avgFPS << std::endl;
+	Engine.AddScene(world);
 
-		G->Event();
-		G->Update();
-		G->Render();
+	world->Init();
 
-		++countedFrames;
-		int frameTicks = capTimer.getTicks();
-		if (frameTicks < SCREEN_TICKS_PER_FRAME)
-		{
-			SDL_Delay(SCREEN_TICKS_PER_FRAME - frameTicks);
-		}
-	}
-	G->Clear();
+	Engine.Setup();
+
+	world->Destroy();
+
+	Engine.Exit();
+
 	return 0;
 }
